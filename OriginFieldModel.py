@@ -22,6 +22,22 @@ class OriginFieldModel():
         self.t_eval = np.linspace(0, 100, int(1e4))
         self.benchmark = self.a*2+3
         self.demo = demo
+        self.xlim = (-self.benchmark, self.benchmark)
+        self.ylim = (-self.benchmark, self.benchmark)
+        self.zlim = (-self.benchmark, self.benchmark)
+    def set_lim(self,xlim=None,ylim=None,zlim=None):
+        if xlim is not None:
+            if not (isinstance(xlim, tuple) and len(xlim) == 2):
+                raise ValueError('xlim should be a tuple of length 2')
+            self.xlim = xlim
+        if ylim is not None:
+            if not (isinstance(ylim, tuple) and len(ylim) == 2):
+                raise ValueError('ylim should be a tuple of length 2')
+            self.ylim = ylim
+        if zlim is not None:
+            if not (isinstance(zlim, tuple) and len(zlim) == 2):
+                raise ValueError('zlim should be a tuple of length 2')
+            self.zlim = zlim
     def initialize_state(self):
         if self.demo:
             theta = np.arange(0,np.pi/6,np.pi/30).reshape(-1, 1)
@@ -125,9 +141,9 @@ class OriginFieldModel():
         z = np.outer(np.ones(np.size(u)), np.cos(v))
         # 在三维图的正中心添加一个半径为1的地球
         ax.plot_surface(x, y, z, color='g', alpha=0.6)
-        ax.set_xlim(-self.benchmark, self.benchmark)
-        ax.set_ylim(-self.benchmark, self.benchmark)
-        ax.set_zlim(-self.benchmark, self.benchmark)
+        ax.set_xlim(self.xlim)
+        ax.set_ylim(self.ylim)
+        ax.set_zlim(self.zlim)
         ax.set_xlabel('X')  
         ax.set_ylabel('Y')
         ax.set_zlabel('Z')
