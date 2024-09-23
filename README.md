@@ -5,3 +5,11 @@ This is homework of Qiugang Zong's course, magnetosphere physics
 
 ```bash
 pip install -r requirements.txt
+```
+## 运行(以CrossTailModel为例)
+
+```bash
+from CrossTailModel.py import *
+model = CrossTailModel()
+model.plot()
+```
